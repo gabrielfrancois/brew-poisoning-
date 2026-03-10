@@ -85,8 +85,8 @@ def options():
     parser.add_argument('--pretrained', action='store_true', help='Load pretrained models from torchvision, if possible [only valid for ImageNet].')
     parser.add_argument('--optimization', default='conservative', type=str, help='Optimization Strategy')
 
-    # Add optimization : add noise to data to enhence the defense
-    parser.add_argument('--input_noise_type', default='gaussian', type=str, choices=['gaussian', 'uniform'], help='kind of noise added to the data (pixels)')
+    # Add optimization : Add noise to data to enhence the defense
+    parser.add_argument('--input_noise_type', default='gaussian', type=str, choices=['gaussian', 'uniform'], help='Noise added to the data (pixels) to make the attack screw up')
     parser.add_argument('--input_noise_std', default=0.0, type=float, help='Noise intensity (standard deviation)')
 
     # Strategy overrides:
