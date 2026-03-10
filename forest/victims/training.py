@@ -98,6 +98,14 @@ def run_step(kettle, poison_delta, loss_fn, epoch, stats, model, defs, criterion
         for _ in range(defs.adversarial_steps):
             inputs = pgd_step(inputs, labels, model, loss_fn, kettle.dm, kettle.ds,
                               eps=kettle.args.eps, tau=kettle.args.tau)
+        
+        # Add noise perturbation to enhence defense
+        if kettle.args.input_noise_std >0:
+            if kettle.args.input_noise_type == 'gaussian':
+                noise = torch.randn_like(inputs) * kettle.args.input_noise_std
+            elif kettle.args.input_noise_type == 'uniform':
+                noise = (torch.rand_like(inputs) - 0.5) * 2 * kettle.args.input_noise_std
+            inputs = (inputs + noise).detach()
 
         # Get loss
         outputs = model(inputs)

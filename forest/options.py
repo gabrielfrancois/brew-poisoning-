@@ -84,6 +84,11 @@ def options():
     # Optimization setup
     parser.add_argument('--pretrained', action='store_true', help='Load pretrained models from torchvision, if possible [only valid for ImageNet].')
     parser.add_argument('--optimization', default='conservative', type=str, help='Optimization Strategy')
+
+    # Add optimization : add noise to data to enhence the defense
+    parser.add_argument('--input_noise_type', default='gaussian', type=str, choices=['gaussian', 'uniform'], help='kind of noise added to the data (pixels)')
+    parser.add_argument('--input_noise_std', default=0.0, type=float, help='Noise intensity (standard deviation)')
+
     # Strategy overrides:
     parser.add_argument('--epochs', default=None, type=int)
     parser.add_argument('--noaugment', action='store_true', help='Do not use data augmentation during training.')
